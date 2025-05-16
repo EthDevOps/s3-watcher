@@ -26,11 +26,12 @@ def check_recent_files(s3_endpoint, s3_bucket, s3_access_key, s3_secret_key, gra
         for obj in response['Contents']:
             # Get the last modified time of the file
             last_modified = obj['LastModified']
+            print(f"Checking File: {obj['Key']} modified at {last_modified}")
             
             # Check if the file was modified within the last 12 hours
 
             if last_modified > twelve_hours_ago:
-                print(f"File found: {obj['Key']} modified at {last_modified}")
+                print(f"Recent file found: {obj['Key']} modified at {last_modified}")
                 return True
 
     # If no recent file is found, send a GET request to the health check URL
